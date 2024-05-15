@@ -19,7 +19,7 @@ def answer(query):
 @app.route('/chat', methods=['POST'])
 def process_post_request():
     d = request.json
-    prompt = d.get['prompt']
+    prompt = d.get('prompt')
     return answer(prompt)
     
 if __name__ == '__main__':
