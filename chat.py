@@ -1,6 +1,6 @@
 from hug.hugchat import hugchat
 from hug.hugchat.login import Login
-from flask import Flask, request, Response, stream_with_context
+from flask import Flask, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -11,17 +11,13 @@ PASSWD = "Simou@2007"
 sign = Login(EMAIL, PASSWD)
 cookies = sign.login(save_cookies=True)
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+def answer(query):
+    query_result = chatbot.chat(query)
+    return query_result
+
 
 @app.route('/chat', methods=['POST'])
 def process_post_request():
-    data = request.get_json()
-    prompt = data.get('prompt')
-
-    def generate_response():
-        for resp in chatbot.query(prompt, stream=True):
-            yield resp  
-
-    return Response(stream_with_context(generate_response()), mimetype='text/plain')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    d = request.json
+    prompt = d.get['prompt']
+    return answer(prompt)
