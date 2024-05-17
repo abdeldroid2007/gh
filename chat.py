@@ -1,5 +1,5 @@
-from hug.hugchat import hugchat
-from hug.hugchat.login import Login
+from hugchat import hugchat
+from hugchat.login import Login
 from flask import Flask, request
 from flask_cors import CORS
 
