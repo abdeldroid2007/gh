@@ -1,4 +1,3 @@
-import requests
 import json
 import os
 import datetime
@@ -7,8 +6,7 @@ import typing
 import traceback
 
 from typing import Union, List
-from requests import Session
-from requests.sessions import RequestsCookieJar
+from .requests import *
 
 from .message import Message
 from . import exceptions
